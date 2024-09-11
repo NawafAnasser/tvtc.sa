@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام رايات</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4; /* لون خلفية محايد */
+        }
+		
+		
+        .header {
+            background-color: rgba(0, 123, 255, 0.3); /* خلفية شفافة */
+            color: white;
+            text-align: center;
+            position: fixed; /* تثبيت الشريط في الأعلى */
+            width: 100%; /* جعل الشريط يغطي العرض الكامل */
+            top: 0; /* وضعه في أعلى الصفحة */
+            z-index: 1000; /* ضمان ظهوره فوق المحتوى */
+            transition: top 0.3s; /* تأثير التمرير */
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #0c0a00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #0c0a00;
+        }
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1; 
+            margin-top: 100px; /* إضافة مساحة أعلى لمراعاة الشريط الثابت */
+        }
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; 
+            overflow: hidden; 
+        }
+        .mySlides {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100vh; 
+        }
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+        .hidden { display: none; }
+        /* الأزرار السابقة والتالية */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 3px;
+            user-select: none;
+            z-index: 10; 
+        }
+        .next { right: 0; }
+        .prev { left: 0; }
+        .btn-login, .btn-logout, .btn-add, .btn-delete {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-add { background-color: #4CAF50; color: white; }
+        .btn-delete { background-color: #f44336; color: white; }
+        .btn-login { background-color: #2196F3; color: white; }
+        .btn-logout { background-color: #FF9800; color: white; }
+        .auth-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+		
+		
+		body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+.nav-list {
+    list-style-type: none; /* إزالة النقاط من القائمة */
+    padding: 0; /* إزالة الحشوة الافتراضية */
+    margin: 0; /* إزالة الهوامش الافتراضية */
+    display: flexbox; /* استخدام Flexbox لترتيب العناصر */
+    flex-wrap: wrap; /* السماح للعناصر باللف في صفوف جديدة عند الحاجة */
+    justify-content: center; /* محاذاة العناصر في المركز */
+}
+
+.category__list__icon {
+    display: flex; /* جعل العناصر داخل الفئة مرنة */
+    flex-direction: column; /* ترتيب العناصر عموديًا */
+    align-items: center; /* محاذاة العناصر في المركز */
+    margin: 10px; /* إضافة مسافة بين العناصر */
+    background-color: #f9f9f9; /* لون خلفية فاتح */
+    border-radius: 8px; /* زوايا مستديرة */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+    padding: 15px; /* إضافة حشوة داخلية */
+    transition: transform 0.2s; /* تأثير التحريك */
+}
+
+.category__list__item:hover {
+    transform: translateY(-5px); /* رفع العنصر عند التمرير */
+}
+
+.category__list__item__container {
+    text-align: center; /* محاذاة النص في المركز */
+}
+
+.category__list__item img {
+    width: 60px; /* ضبط عرض الصورة */
+    height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  text-align: center;
+}
+
+    </style>
+</head>
+<body>
+
+<div class="header">		<img src="TVTC.png" alt="Paris" class="center">
+    <h1>نظام جدول الطلاب</h1>
+				<h2><button onclick="document.getElementById('id01').style.display='block'" style="width:140px;">تسجيل الدخول</button></h2>
+
+</div>
+
+<div class="slideshow-container">
+    <div class="mySlides active">
+        <img src="image1.jpg" alt="صورة 1">
+    </div>
+    <div class="mySlides">
+        <img src="image2.jpg" alt="صورة 2">
+    </div>
+    <div class="mySlides">
+        <img src="background-image.jpg" alt="صورة 3">
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<div class="container">
+    <main>
+
+<nav>
+	
+        <li><div class="category__list__icon d__grid grid__column__lg__3 responsive__custom__small__lg"><a href="https://rytreg.tvtc.gov.sa/StudentRegistrationSsb/ssb/registration" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/register.png" alt="التسجيل الذاتي للمتدربين"></div><h4 class="item__title font__bold">التسجيل الذاتي للمتدربين</h4></div></a><a href="https://rytstuss.tvtc.gov.sa/StudentSelfService" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/hr.png" alt="الخدمات الذاتية للمتدربين"></div><h4 class="item__title font__bold">الخدمات الذاتية للمتدربين</h4></div></a><a href="https://esrayat.tvtc.gov.sa/resetpw.aspx" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/password.png" alt="إستعادة كلمة المرور للمتدربين"></div><h4 class="item__title font__bold">إستعادة كلمة المرور للمتدربين</h4></div></a><a href="https://rytreg.tvtc.gov.sa/StudentRegistrationSsb/ssb/registrationHistory/registrationHistory" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/ts.png" alt="عرض جدول المتدرب"></div><h4 class="item__title font__bold">عرض جدول المتدرب</h4></div></a><a href="https://rytxeex.tvtc.gov.sa/BannerExtensibility/customPage/page/TraineeSmartCard" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/register-newitem.png" alt="البطاقة الرقمية"></div><h4 class="item__title font__bold">البطاقة الرقمية</h4></div></a><a href="https://login.microsoftonline.com" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/email.png" alt="البريد الإلكتروني"></div><h4 class="item__title font__bold">البريد الإلكتروني</h4></div></a><a href="https://esrayat.tvtc.gov.sa/inqueryUserName.aspx" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/search.png" alt="الإستعلام عن اسم المستخدم للمتدربين"></div><h4 class="item__title font__bold">الإستعلام عن اسم المستخدم للمتدربين</h4></div></a><a href="https://lms.elearning.edu.sa/" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/online-learning.png" alt="بوابة البلاك بورد"></div><h4 class="item__title font__bold">بوابة البلاك بورد</h4></div></a><a href="https://rytxeex.tvtc.gov.sa/BannerExtensibility/customPage/page/Student_Requests" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/book.png" alt="معادلة المقررات"></div><h4 class="item__title font__bold">معادلة المقررات</h4></div></a><a href="https://rytstuss.tvtc.gov.sa/StudentSelfService/ssb/studentCommonDashboard" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/التقارير.png" alt="استعراض سجل الدرجات الحالي"></div><h4 class="item__title font__bold">استعراض سجل الدرجات الحالي</h4></div></a><a href="https://rytstuss.tvtc.gov.sa/StudentSelfService/ssb/studentAttendanceTracking" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/search.png" alt="الاستعلام عن الحضور و الغياب"></div><h4 class="item__title font__bold">الاستعلام عن الحضور و الغياب</h4></div></a><a href="https://rytstuss.tvtc.gov.sa/StudentSelfService/ssb/academicTranscript#!/:transcriptLevel/:transcriptType" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/search-3.png" alt="استعراض السجل التدريبي"></div><h4 class="item__title font__bold">استعراض السجل التدريبي</h4></div></a><a href="https://serv.tvtc.gov.sa/app/traineesgate/TraineeBankAccount.aspx" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/cridit-card.png" alt="الاستعلام عن حالة البطاقة البنكية للمتدرب"></div><h4 class="item__title font__bold">الاستعلام عن حالة البطاقة البنكية للمتدرب</h4></div></a><a href="https://aws.amazon.com/ar/education/awseducate/" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/amazon-aws.png" alt="خدمات أمازون التعليمية AWS"></div><h4 class="item__title font__bold">خدمات أمازون التعليمية AWS</h4></div></a><a href="https://fs.tvtc.edu.sa/adfs/portal/updatepassword" class="category__list__item" target="_blank"><div class="category__list__item__container "><div class="category__list__item__icon"><img src="https://tvtc.gov.sa/ar/Departments/tvtcdepartments/Rayat/PublishingImages/pic/password.png" alt="تحديث كلمة المرور"></div><h4 class="item__title font__bold">تحديث كلمة المرور</h4></div></a><div class="groupheader item medium" style="display: none;">2</div></div>    <ul class="nav-list"></li>
+    </ul>
+</nav>
+
+<div id="id01" class="modal">
+  
+<form class="modal-content animate" action="students" method="post" style="width: 400px; height: auto; padding: 20px;">
+    <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="TVTC.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+        <label for="uname"><b>تسجيل الدخول</b></label>
+        <input type="text" placeholder="أدخل اسم المستخدم" id="username" required>
+
+        <label for="psw"><b></b></label>
+        <input type="password" placeholder="أدخل كلمة المرور" id="password" required>
+
+        <button type="submit">تسجيل الدخول</button>
+        <label>
+            <input type="checkbox" checked="checked" name="remember"> تذكرني
+        </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">إلغاء</button>
+        <span class="psw">نسيت <a href="#">كلمة المرور؟</a></span>
+    </div>
+</form></div>
+
+
+        <div id="mainSection" class="hidden">
+            <input type="text" id="studentName" placeholder="اسم الطالب">
+            <input type="text" id="subject" placeholder="اسم المادة">
+            <button class="btn-add" onclick="addStudent()">إضافة طالب</button>
+            <button class="btn-delete" onclick="deleteSubject()">حذف المادة</button>
+
+            <h2>جدول الطلاب</h2>
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>اسم الطالب</th>
+                        <th>اسم المادة</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script>
+    let lastScrollTop = 0;
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", function() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            header.style.top = "-100px"; // إخفاء الشريط
+        } else {
+            header.style.top = "0"; // إظهار الشريط
+        }
+        lastScrollTop = scrollTop;
+    });
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        const slides = document.getElementsByClassName("mySlides");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        slides[slideIndex - 1].style.display = "block";  
+        setTimeout(showSlides, 3000); 
+    }
+
+    function plusSlides(n) {
+        slideIndex += n;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+        if (slideIndex < 1) { slideIndex = slides.length; }
+        showSlides();
+    }
+
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === 'admin' && password === 'password') {
+            localStorage.setItem('loggedIn', 'true');
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('mainSection').classList.remove('hidden');
+            loadStudents();
+            document.querySelector('.btn-logout').classList.remove('hidden');
+        } else {
+            alert('اسم المستخدم أو كلمة المرور غير صحيحة.');
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('loggedIn');
+        document.getElementById('authSection').classList.remove('hidden');
+        document.getElementById('mainSection').classList.add('hidden');
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    }
+
+    function addStudent() {
+        const studentName = document.getElementById('studentName').value;
+        const subject = document.getElementById('subject').value;
+
+        if (studentName && subject) {
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            students.push({ name: studentName, subject: subject });
+            localStorage.setItem('students', JSON.stringify(students));
+            loadStudents();
+            document.getElementById('studentName').value = '';
+            document.getElementById('subject').value = '';
+        } else {
+            alert('يرجى ملء جميع الحقول.');
+        }
+    }
+
+    function loadStudents() {
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+        const tbody = document.getElementById('studentsTable').getElementsByTagName('tbody')[0];
+        tbody.innerHTML = '';
+
+        students.forEach((student) => {
+            const row = tbody.insertRow();
+            row.insertCell(0).innerText = student.name;
+            row.insertCell(1).innerText = student.subject;
+            const actionsCell = row.insertCell(2);
+            const acceptButton = document.createElement('button');
+            acceptButton.innerText = 'قبول';
+            acceptButton.onclick = () => alert(`تم قبول الطالب: ${student.name}`);
+            actionsCell.appendChild(acceptButton);
+
+            const rejectButton = document.createElement('button');
+            rejectButton.innerText = 'رفض';
+            rejectButton.onclick = () => alert(`تم رفض الطالب: ${student.name}`);
+            actionsCell.appendChild(rejectButton);
+        });
+    }
+
+    function deleteSubject() {
+        const subject = document.getElementById('subject').value;
+        if (subject) {
+            let students = JSON.parse(localStorage.getItem('students')) || [];
+            students = students.filter(student => student.subject !== subject);
+            localStorage.setItem('students', JSON.stringify(students));
+            loadStudents();
+            document.getElementById('subject').value = '';
+        } else {
+            alert('يرجى إدخال اسم المادة.');
+        }
+    
+	// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+
+<footer class="footer">
+    <p class="footer__title">تواصل معنا</p>
+    <div class="footer__social">
+		      <a href="https://x.com/tvtcweb_ask">  <img src="11.png"  alt="شريط"style="width:900px;height:200px;"></a>
+
+    </div>
+    <a href="https://www.snapchat.com/add/p_uap"> <p class="footer__copy">&#169; Copyright ©2024 All rights reserved | made by Nawaf k Alnasser (:</p></a>
+</footer>
+
+</body>
+</html>
