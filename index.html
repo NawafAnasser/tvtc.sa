@@ -270,7 +270,7 @@ span.psw {
 
 <div class="header">		<img src="TVTC.png" alt="Paris" class="center">
     <h1>نظام جدول الطلاب</h1>
-				<h2><button onclick="document.getElementById('id01').style.display='block'" style="width:140px;">تسجيل الدخول</button></h2>
+				<h2><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">تسجيل الدخول</button></h2>
 
 </div>
 
@@ -298,29 +298,39 @@ span.psw {
 </nav>
 
 <div id="id01" class="modal">
-  
+  <br>
+  <br>
+  <br>
 <form class="modal-content animate" action="students" method="post" style="width: 400px; height: auto; padding: 20px;">
     <div class="imgcontainer">
-        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <img src="TVTC.png" alt="Avatar" class="avatar">
+        <img src="TVTC.png" style="width: 300px; height: auto; padding: 20px;" >
     </div>
 
-    <div class="container">
+    <div   id="authSection">
         <label for="uname"><b>تسجيل الدخول</b></label>
         <input type="text" placeholder="أدخل اسم المستخدم" id="username" required>
 
         <label for="psw"><b></b></label>
         <input type="password" placeholder="أدخل كلمة المرور" id="password" required>
 
-        <button type="submit">متابعة</button>
+				<h1><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">متابعة</button></h1>
         <label>
             <input type="checkbox" checked="checked" name="remember"> تذكرني
+        </label>
+		
+		
+		
+        <label>
+		<br>
+		        <span class="psw">نسيت <a href="https://fs.tvtc.edu.sa/adfs/portal/updatepassword">كلمة المرور؟</a></span>
+
         </label>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">إلغاء</button>
-        <span class="psw">نسيت <a href="https://fs.tvtc.edu.sa/adfs/portal/updatepassword">كلمة المرور؟</a></span>
+	
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"> إلغاء   </button>
+		
     </div>
 </form></div>
 
